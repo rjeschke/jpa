@@ -1,0 +1,9 @@
+build/
+*.o
+*.obj
+*.idb
+*.pdb
+*.exp
+*.manifest
+*.lib
+!portaudio_x86.lib

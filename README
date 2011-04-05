@@ -1,0 +1,28 @@
+jpa - portaudio Java bindings
+----------------------------
+
+'jpa' is a Java wrapper for libPortaudio, bringing this nice audio API
+to us Java developers.
+
+Currently Win32(64) and Linux32/64 binaries are included.
+
+This is a WIP release.
+
+Build instructions:
+-------------------
+To build the Jar simply use 'ant'. You'll find 'jpa.jar'
+inside of 'build/jar'.
+
+To rebuild the binaries:
+- On Linux 32 bit:
+   'ant linux32_clean' to clean the native target
+   'ant linux32'
+- On Linux 64 bit:
+   'ant linux64_clean' to clean the native target
+   'ant linux64'
+- On Windows 32 bit:
+   'ant win32_clean' to clean the native target
+   'ant win32'
+
+---
+Project link: https://github.com/rjeschke/jpa
