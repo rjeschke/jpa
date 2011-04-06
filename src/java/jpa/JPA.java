@@ -29,9 +29,32 @@ public class JPA
     public final static int paDitherOff                             = 0x00000002;
     public final static int paNeverDropInput                        = 0x00000004;
 
+    /** 
+     * Retrieve the release number of the currently running PortAudio build.
+     * @return The release number.
+     */     
     public static native int getVersion();
+    /** 
+     * Retrieve a textual description of the current PortAudio build.
+     * @return Textual description of the current build.
+     */     
     public static native String getVersionText();
+    /** 
+     * Retrieve the number of available host APIs. Even if a host API is
+     * available it may have no devices available.
+     * @return A non-negative value indicating the number of available host APIs
+     * or, a PaErrorCode (which are always negative) if PortAudio is not initialized
+     * or an error is encountered.
+     */ 
     public static native int getHostApiCount();
+    /** 
+     * Retrieve the index of the default host API.
+     * <p>The default host API will be the lowest common denominator host API on the 
+     * current platform and is unlikely to provide the best performance.</p>
+     * @return A non-negative value ranging from 0 to (Pa_GetHostApiCount()-1) 
+     * indicating the default host API index or, a PaErrorCode (which are always 
+     * negative) if PortAudio is not initialized or an error is encountered.
+     */     
     public static native int getDefaultHostApi();
     public static native int getDeviceCount();
     public static native int getDefaultInputDevice();
@@ -44,6 +67,21 @@ public class JPA
     public static native void sleep(long msec);
     public static native long getDirectByteBufferPointer(ByteBuffer buffer);
     
+    /** 
+     * Library initialization function - call this before using PortAudio.
+     * <p>This function initialises internal data structures and prepares underlying
+     * host APIs for use.  With the exception of Pa_GetVersion(), Pa_GetVersionText(),
+     * and Pa_GetErrorText(), this function MUST be called before using any other
+     * PortAudio API functions.</p>
+     * <p>If Pa_Initialize() is called multiple times, each successful
+     * call must be matched with a corresponding call to Pa_Terminate().
+     * Pairs of calls to Pa_Initialize()/Pa_Terminate() may overlap, and are not 
+     * required to be fully nested.</p>
+     * <p>Note that if Pa_Initialize() returns an error code, Pa_Terminate() should
+     * NOT be called.</p>
+     * @return paNoError if successful, otherwise an error code indicating the cause of failure.
+     * @see jpa.JPA#terminate()
+     */ 
     public static PaError initialize()
     {
         if(jpaPtr == 0)
@@ -52,6 +90,19 @@ public class JPA
         return PaError.fromValue(paInitialize());
     }
     
+    /** 
+     * Library termination function - call this when finished using PortAudio.
+     * <p>This function deallocates all resources allocated by PortAudio since it was
+     * initializied by a call to Pa_Initialize(). In cases where Pa_Initialise() has
+     * been called multiple times, each call must be matched with a corresponding call
+     * to Pa_Terminate(). The final matching call to Pa_Terminate() will automatically
+     * close any PortAudio streams that are still open.</p>
+     * <p>Pa_Terminate() MUST be called before exiting a program which uses PortAudio. 
+     * Failure to do so may result in serious resource leaks, such as audio devices 
+     * not being available until the next reboot.</p>
+     * @return paNoError if successful, otherwise an error code indicating the cause of failure.
+     * @see jpa.JPA#initialize()
+     */ 
     public static PaError terminate()
     {
         dataFree(jpaPtr);
@@ -59,6 +110,11 @@ public class JPA
         return PaError.fromValue(paTerminate());
     }
     
+    /**
+     * Sets the user call-back function.
+     * 
+     * @param callback User call-back object.
+     */
     public static void setCallback(PaCallback callback)
     {
         paCallback = callback;
@@ -69,6 +125,11 @@ public class JPA
         return PaError.fromValue(paIsFormatSupported(inputParameters, outputParameters, sampleRate));
     }
     
+    /** 
+     * Translate the supplied PortAudio error code into a human readable message.
+     * @param err PortAudio error code.
+     * @return Error code as a human readable message. 
+     */ 
     public static String getErrorText(PaError err)
     {
         return paGetErrorText(err.getValue());

@@ -1,17 +1,20 @@
-jpa - portaudio Java bindings
+jpa - PortAudio Java bindings
 ----------------------------
 
-'jpa' is a Java wrapper for libPortaudio, bringing this nice audio API
+'jpa' is a Java wrapper for libPortAudio, bringing this nice audio API
 to us Java developers.
 
 Currently Win32(64) and Linux32/64 binaries are included.
 
-This is a WIP release (at least JavaDoc is missing, but you may have a look
-at the portaudio19 docs).
+Generated ApiDoc is mostly (slighty modified) copy'n'paste from the original
+PortAudio docs.
+
 
 Usage:
 ------
-Just do an ant build and classpath the jpa.jar into your project.
+Just do 'ant release" and classpath the 'release/jpa.jar' into your project.
+(I'll push the release folder unto github as soon as the ApiDoc is finished.)
+
 
 Using Eclipse:
 --------------
@@ -20,14 +23,19 @@ For Java:
   - Configure Build Path -> Sources -> Link Folders 'src/java' and 'lib' from
     the project folder
   - Remove the old 'src' folder inside the Eclipse project
+  - Or use 'Create project from existing source'
 For C:
   - Create a new C makefile project, override default location and use 'src/native'
     from the project folder
+  - (Note to Windows users: Setting up the platform SDK or Visual Studio to build
+    stuff on the command line is a bit tricky, I'll post a HOWTO in the near future.)
+
 
 Build instructions:
 -------------------
-To build the Jar simply use 'ant'. You'll find 'jpa.jar'
-inside of 'build/jar'.
+To build the Jar simply use 'ant'. You'll find 'jpa.jar' inside of 'build/jar'.
+For a full release build, use 'ant release'. This will create the release jars
+inside the 'release' folder (containing binary, apidoc and source).
 
 To rebuild the binaries:
 - On Linux 32 bit:
