@@ -50,4 +50,17 @@
     </delete>
   </target>
 
+  <target name="linux64">
+    <exec executable="make" dir="src\native\linux64">
+      <arg value="all"/>
+    </exec>
+  </target>
+
+  <target name="linux64_clean">
+    <delete>
+      <fileset dir="lib/jpa/linux64"/>
+      <fileset dir="src/native/linux64" excludes="makefile"/>
+    </delete>
+  </target>
+
 </project>

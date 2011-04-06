@@ -7,3 +7,7 @@ build/
 *.manifest
 *.lib
 !portaudio_x86.lib
+.settings
+.classpath
+.project
+.cproject

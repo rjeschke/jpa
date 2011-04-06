@@ -6,7 +6,23 @@ to us Java developers.
 
 Currently Win32(64) and Linux32/64 binaries are included.
 
-This is a WIP release.
+This is a WIP release (at least JavaDoc is missing, but you may have a look
+at the portaudio19 docs).
+
+Usage:
+------
+Just do an ant build and classpath the jpa.jar into your project.
+
+Using Eclipse:
+--------------
+For Java:
+  - create a new Java project in your workspace
+  - Configure Build Path -> Sources -> Link Folders 'src/java' and 'lib' from
+    the project folder
+  - Remove the old 'src' folder inside the Eclipse project
+For C:
+  - Create a new C makefile project, override default location and use 'src/native'
+    from the project folder
 
 Build instructions:
 -------------------
@@ -15,12 +31,15 @@ inside of 'build/jar'.
 
 To rebuild the binaries:
 - On Linux 32 bit:
+   (You will need to have the portaudio19 dev package installed)
    'ant linux32_clean' to clean the native target
    'ant linux32'
 - On Linux 64 bit:
+   (You will need to have the portaudio19 dev package installed)
    'ant linux64_clean' to clean the native target
    'ant linux64'
 - On Windows 32 bit:
+   (Includes all stuff needed to build)
    'ant win32_clean' to clean the native target
    'ant win32'
 
