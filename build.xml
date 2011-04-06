@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="jpa" default="dist">
 
- <target name="clean">
-  <delete dir="build"/>
- </target>
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
 
- <target name="compile">
-  <mkdir dir="build/classes"/>
-  <javac srcdir="src/java" destdir="build/classes" target="1.6" includeAntRuntime="false"/>
- </target>
+  <target name="compile">
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src/java" destdir="build/classes" target="1.6" includeAntRuntime="false"/>
+  </target>
 
- <target name="jar">
-  <mkdir dir="build/jar"/>
-  <copy toDir="build/classes">
-   <fileset dir="lib"/>
-  </copy>
-  <jar destfile="build/jar/jpa.jar" basedir="build/classes"/>
- </target>
+  <target name="jar">
+    <mkdir dir="build/jar"/>
+    <copy toDir="build/classes">
+      <fileset dir="lib"/>
+    </copy>
+    <jar destfile="build/jar/jpa.jar" basedir="build/classes"/>
+  </target>
 
- <target name="dist" depends="clean,compile,jar"/>
+  <target name="dist" depends="clean,compile,jar"/>
 
- <target name="win32">
-  <exec executable="nmake.exe" dir="src\native\win32">
-   <arg value="-f"/>
-   <arg value="makefile.mak"/>
-  </exec>
-  <delete>
-   <fileset dir="lib/jpa/win32" excludes="*.dll"/>
-  </delete>
- </target>
+  <target name="win32">
+    <exec executable="nmake.exe" dir="src\native\win32">
+      <arg value="-f"/>
+      <arg value="makefile.mak"/>
+    </exec>
+    <delete>
+      <fileset dir="lib/jpa/win32" excludes="*.dll"/>
+    </delete>
+  </target>
 
- <target name="win32_clean">
-  <delete>
-   <fileset dir="lib/jpa/win32" excludes="portaudio_x86.dll"/>
-   <fileset dir="src/native/win32" excludes="makefile.mak"/>
-  </delete>
- </target>
+  <target name="win32_clean">
+    <delete>
+      <fileset dir="lib/jpa/win32" excludes="portaudio_x86.dll"/>
+      <fileset dir="src/native/win32" excludes="makefile.mak"/>
+    </delete>
+  </target>
 
- <target name="linux32">
-  <exec executable="make" dir="src\native\linux32">
-   <arg value="all"/>
-  </exec>
- </target>
+  <target name="linux32">
+    <exec executable="make" dir="src\native\linux32">
+      <arg value="all"/>
+    </exec>
+  </target>
 
- <target name="linux32_clean">
-  <delete>
-   <fileset dir="lib/jpa/linux32"/>
-   <fileset dir="src/native/linux32" excludes="makefile"/>
-  </delete>
- </target>
+  <target name="linux32_clean">
+    <delete>
+      <fileset dir="lib/jpa/linux32"/>
+      <fileset dir="src/native/linux32" excludes="makefile"/>
+    </delete>
+  </target>
 
 </project>
