@@ -1,5 +1,7 @@
 jpa - PortAudio Java bindings
-----------------------------
+Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
+See LICENSE.txt for licensing information.
+-------------------------------------------------------
 
 'jpa' is a Java wrapper for libPortAudio, bringing this nice audio API
 to us Java developers.
