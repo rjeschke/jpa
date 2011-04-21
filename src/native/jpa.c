@@ -93,7 +93,7 @@ static jstring makeString(JNIEnv *env, const char* str)
 
 static PaStreamParameters* toStreamParameters(JNIEnv* env, jobject obj, PaStreamParameters* p)
 {
-    jclass jcl          = (*env)->FindClass(env, "jpa/PaStreamParameters");
+    jclass jcl          = (*env)->FindClass(env, "com/github/rjeschke/jpa/PaStreamParameters");
     memset(p, 0, sizeof(PaStreamParameters));
 
     p->device           = (PaDeviceIndex)(*env)->GetIntField(env, obj,
@@ -110,7 +110,7 @@ static PaStreamParameters* toStreamParameters(JNIEnv* env, jobject obj, PaStream
 
 static jobject toStreamInfo(JNIEnv* env, const PaStreamInfo* inf)
 {
-    jclass jcl   = (*env)->FindClass(env, "jpa/PaStreamInfo");
+    jclass jcl   = (*env)->FindClass(env, "com/github/rjeschke/jpa/PaStreamInfo");
     jmethodID ct = (*env)->GetMethodID(env, jcl, "<init>", "()V");
     jobject ret  = (*env)->NewObject(env, jcl, ct);
 
@@ -131,7 +131,7 @@ static jobject toStreamInfo(JNIEnv* env, const PaStreamInfo* inf)
 
 static jobject toHostErrorInfo(JNIEnv* env, const PaHostErrorInfo* inf)
 {
-    jclass jcl   = (*env)->FindClass(env, "jpa/PaHostErrorInfo");
+    jclass jcl   = (*env)->FindClass(env, "com/github/rjeschke/jpa/PaHostErrorInfo");
     jmethodID ct = (*env)->GetMethodID(env, jcl, "<init>", "()V");
     jobject ret  = (*env)->NewObject(env, jcl, ct);
 
@@ -147,7 +147,7 @@ static jobject toHostErrorInfo(JNIEnv* env, const PaHostErrorInfo* inf)
 
 static jobject toHostApiInfo(JNIEnv* env, const PaHostApiInfo* inf)
 {
-    jclass jcl   = (*env)->FindClass(env, "jpa/PaHostApiInfo");
+    jclass jcl   = (*env)->FindClass(env, "com/github/rjeschke/jpa/PaHostApiInfo");
     jmethodID ct = (*env)->GetMethodID(env, jcl, "<init>", "()V");
     jobject ret  = (*env)->NewObject(env, jcl, ct);
 
@@ -167,7 +167,7 @@ static jobject toHostApiInfo(JNIEnv* env, const PaHostApiInfo* inf)
 
 static jobject toPaDeviceInfo(JNIEnv* env, const PaDeviceInfo* inf)
 {
-    jclass jcl   = (*env)->FindClass(env, "jpa/PaDeviceInfo");
+    jclass jcl   = (*env)->FindClass(env, "com/github/rjeschke/jpa/PaDeviceInfo");
     jmethodID ct = (*env)->GetMethodID(env, jcl, "<init>", "()V");
     jobject ret  = (*env)->NewObject(env, jcl, ct);
 
@@ -202,79 +202,79 @@ static jobject toPaDeviceInfo(JNIEnv* env, const PaDeviceInfo* inf)
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_getVersion(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_getVersion(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_GetVersion();
 }
 
-JNIEXPORT jstring JNICALL Java_jpa_JPA_getVersionText(JNIEnv *env, jclass clazz)
+JNIEXPORT jstring JNICALL Java_com_github_rjeschke_jpa_JPA_getVersionText(JNIEnv *env, jclass clazz)
 {
     return makeString(env, (char*)Pa_GetVersionText());
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paInitialize(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paInitialize(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_Initialize();
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paTerminate(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paTerminate(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_Terminate();
 }
 
-JNIEXPORT jstring JNICALL Java_jpa_JPA_paGetErrorText(JNIEnv *env, jclass clazz, jint error)
+JNIEXPORT jstring JNICALL Java_com_github_rjeschke_jpa_JPA_paGetErrorText(JNIEnv *env, jclass clazz, jint error)
 {
     return makeString(env, (char*)Pa_GetErrorText((PaError)error));
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_getHostApiCount(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_getHostApiCount(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_GetHostApiCount();
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_getDefaultHostApi(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_getDefaultHostApi(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_GetDefaultHostApi();
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_getDeviceCount(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_getDeviceCount(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_GetDeviceCount();
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_getDefaultInputDevice(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_getDefaultInputDevice(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_GetDefaultInputDevice();
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_getDefaultOutputDevice(JNIEnv *env, jclass clazz)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_getDefaultOutputDevice(JNIEnv *env, jclass clazz)
 {
     return (jint)Pa_GetDefaultOutputDevice();
 }
 
-JNIEXPORT jobject JNICALL Java_jpa_JPA_getDeviceInfo(JNIEnv *env, jclass clazz, jint index)
+JNIEXPORT jobject JNICALL Java_com_github_rjeschke_jpa_JPA_getDeviceInfo(JNIEnv *env, jclass clazz, jint index)
 {
     const PaDeviceInfo *inf = Pa_GetDeviceInfo((PaDeviceIndex)index);
     return inf ? toPaDeviceInfo(env, inf) : 0;
 }
 
-JNIEXPORT jobject JNICALL Java_jpa_JPA_getHostApiInfo(JNIEnv *env, jclass clazz, jint index)
+JNIEXPORT jobject JNICALL Java_com_github_rjeschke_jpa_JPA_getHostApiInfo(JNIEnv *env, jclass clazz, jint index)
 {
     const PaHostApiInfo* inf = Pa_GetHostApiInfo((PaHostApiIndex)index);
     return inf ? toHostApiInfo(env, inf) : 0;
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_hostApiTypeIdToHostApiIndex(JNIEnv *env, jclass clazz, jint type)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_hostApiTypeIdToHostApiIndex(JNIEnv *env, jclass clazz, jint type)
 {
     return (jint)Pa_HostApiTypeIdToHostApiIndex((PaHostApiTypeId)type);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_hostApiDeviceIndexToDeviceIndex(JNIEnv *env, jclass clazz, jint hostApi, jint hostApiDeviceIndex)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_hostApiDeviceIndexToDeviceIndex(JNIEnv *env, jclass clazz, jint hostApi, jint hostApiDeviceIndex)
 {
     return (jint)Pa_HostApiDeviceIndexToDeviceIndex((PaHostApiIndex)hostApi, (int)hostApiDeviceIndex);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paIsFormatSupported(JNIEnv *env, jclass clazz, jobject jInput, jobject jOutput, jdouble sampleRate)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paIsFormatSupported(JNIEnv *env, jclass clazz, jobject jInput, jobject jOutput, jdouble sampleRate)
 {
     PaStreamParameters pi, po;
     PaStreamParameters *i, *o;
@@ -285,43 +285,43 @@ JNIEXPORT jint JNICALL Java_jpa_JPA_paIsFormatSupported(JNIEnv *env, jclass claz
     return Pa_IsFormatSupported(i, o, (double)sampleRate);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paCloseStream(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paCloseStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return Pa_CloseStream(j->stream);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paStartStream(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paStartStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return Pa_StartStream(j->stream);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paStopStream(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paStopStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return Pa_StopStream(j->stream);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paAbortStream(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paAbortStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return Pa_AbortStream(j->stream);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paIsStreamStopped(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paIsStreamStopped(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return Pa_IsStreamStopped(j->stream);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paIsStreamActive(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paIsStreamActive(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return Pa_IsStreamActive(j->stream);
 }
 
-JNIEXPORT jlong JNICALL Java_jpa_JPA_dataAlloc(JNIEnv *env, jclass clazz)
+JNIEXPORT jlong JNICALL Java_com_github_rjeschke_jpa_JPA_dataAlloc(JNIEnv *env, jclass clazz)
 {
     JPA_DATA* data = (JPA_DATA*)malloc(sizeof(JPA_DATA));
     memset(data, 0, sizeof(JPA_DATA));
@@ -329,38 +329,38 @@ JNIEXPORT jlong JNICALL Java_jpa_JPA_dataAlloc(JNIEnv *env, jclass clazz)
     data->clazz = clazz;
     data->callback = (*env)->GetStaticMethodID(env, clazz, "callback", "(I)V");
     data->resize = (*env)->GetStaticMethodID(env, clazz, "resize", "(I)V");
-    data->input = (*env)->GetStaticFieldID(env, clazz, "input", "Ljpa/PaBuffer;");
-    data->output = (*env)->GetStaticFieldID(env, clazz, "output", "Ljpa/PaBuffer;");
-    data->buffer = (*env)->GetFieldID(env, (*env)->FindClass(env, "Ljpa/PaBuffer;"), "byteBuffer", "Ljava/nio/ByteBuffer;");
+    data->input = (*env)->GetStaticFieldID(env, clazz, "input", "Lcom/github/rjeschke/jpa/PaBuffer;");
+    data->output = (*env)->GetStaticFieldID(env, clazz, "output", "Lcom/github/rjeschke/jpa/PaBuffer;");
+    data->buffer = (*env)->GetFieldID(env, (*env)->FindClass(env, "Lcom/github/rjeschke/jpa/PaBuffer;"), "byteBuffer", "Ljava/nio/ByteBuffer;");
     return ptr2Long(data);
 }
 
-JNIEXPORT void JNICALL Java_jpa_JPA_dataFree(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT void JNICALL Java_com_github_rjeschke_jpa_JPA_dataFree(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     if(jPtr)
         free(long2Ptr(jPtr));
 }
 
-JNIEXPORT jobject JNICALL Java_jpa_JPA_paGetStreamInfo(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jobject JNICALL Java_com_github_rjeschke_jpa_JPA_paGetStreamInfo(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     const PaStreamInfo* inf = Pa_GetStreamInfo(j->stream);
     return inf ? toStreamInfo(env, inf) : 0;
 }
 
-JNIEXPORT jobject JNICALL Java_jpa_JPA_getLastHostErrorInfo(JNIEnv *env, jclass clazz)
+JNIEXPORT jobject JNICALL Java_com_github_rjeschke_jpa_JPA_getLastHostErrorInfo(JNIEnv *env, jclass clazz)
 {
     const PaHostErrorInfo *inf = Pa_GetLastHostErrorInfo();
     return inf ? toHostErrorInfo(env, inf) : 0;
 }
 
-JNIEXPORT jdouble JNICALL Java_jpa_JPA_paGetStreamCpuLoad(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jdouble JNICALL Java_com_github_rjeschke_jpa_JPA_paGetStreamCpuLoad(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return (jdouble)Pa_GetStreamCpuLoad(j->stream);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paOpenStream(JNIEnv *env, jclass clazz, jlong jPtr, jobject jInput, jobject jOutput, jdouble sampleRate, jint frames, jint flags)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paOpenStream(JNIEnv *env, jclass clazz, jlong jPtr, jobject jInput, jobject jOutput, jdouble sampleRate, jint frames, jint flags)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     PaStreamParameters *i, *o;
@@ -374,7 +374,7 @@ JNIEXPORT jint JNICALL Java_jpa_JPA_paOpenStream(JNIEnv *env, jclass clazz, jlon
     return Pa_OpenStream(&(j->stream), i, o, (double)sampleRate, frames, (PaStreamFlags)flags, jpaStreamCallback, j);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paOpenDefaultStream(JNIEnv *env, jclass clazz, jlong jPtr, jint numInputChannels, jint numOutputChannels, jint sampleFormat, jdouble sampleRate, jint frames)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paOpenDefaultStream(JNIEnv *env, jclass clazz, jlong jPtr, jint numInputChannels, jint numOutputChannels, jint sampleFormat, jdouble sampleRate, jint frames)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
 
@@ -384,23 +384,23 @@ JNIEXPORT jint JNICALL Java_jpa_JPA_paOpenDefaultStream(JNIEnv *env, jclass claz
     return Pa_OpenDefaultStream(&(j->stream), (int)numInputChannels, (int)numOutputChannels, (PaSampleFormat)sampleFormat, sampleRate, frames, jpaStreamCallback, j);
 }
 
-JNIEXPORT jint JNICALL Java_jpa_JPA_paGetSampleSize(JNIEnv *env, jclass clazz, jint format)
+JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paGetSampleSize(JNIEnv *env, jclass clazz, jint format)
 {
     return (jint)Pa_GetSampleSize((PaSampleFormat)format);
 }
 
-JNIEXPORT jdouble JNICALL Java_jpa_JPA_paGetStreamTime(JNIEnv *env, jclass clazz, jlong jPtr)
+JNIEXPORT jdouble JNICALL Java_com_github_rjeschke_jpa_JPA_paGetStreamTime(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
     return (jdouble)Pa_GetStreamTime(j->stream);
 }
 
-JNIEXPORT void JNICALL Java_jpa_JPA_sleep(JNIEnv *env, jclass clazz, jlong msec)
+JNIEXPORT void JNICALL Java_com_github_rjeschke_jpa_JPA_sleep(JNIEnv *env, jclass clazz, jlong msec)
 {
     Pa_Sleep((long int)msec);
 }
 
-JNIEXPORT jlong JNICALL Java_jpa_JPA_getDirectByteBufferPointer(JNIEnv *env, jclass clazz, jobject buffer)
+JNIEXPORT jlong JNICALL Java_com_github_rjeschke_jpa_JPA_getDirectByteBufferPointer(JNIEnv *env, jclass clazz, jobject buffer)
 {
     return ptr2Long((*env)->GetDirectBufferAddress(env, buffer));
 }

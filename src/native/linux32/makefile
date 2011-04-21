@@ -13,7 +13,7 @@ objects = jpa.o
 
 $(EXE): $(objects)
 	@echo Linking $(EXE) ...
-	@$(CPP) -shared -o $(EXE) $(LIBS) $(objects)
+	@$(CC) -shared -o $(EXE) $(LIBS) $(objects)
 	@echo READY.
 
 all: $(EXE)

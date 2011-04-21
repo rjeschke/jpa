@@ -2,11 +2,12 @@
 * Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
 * See LICENSE.txt for licensing information.
 */
-package jpa;
+package com.github.rjeschke.jpa;
 
 import java.nio.ByteBuffer;
 
-import jpa.PaBuffer.Type;
+import com.github.rjeschke.jpa.PaBuffer.Type;
+
 
 public class JPA
 {
@@ -84,7 +85,7 @@ public class JPA
      * <p>Note that if Pa_Initialize() returns an error code, Pa_Terminate() should
      * NOT be called.</p>
      * @return paNoError if successful, otherwise an error code indicating the cause of failure.
-     * @see jpa.JPA#terminate()
+     * @see com.github.rjeschke.jpa.JPA#terminate()
      */ 
     public static PaError initialize()
     {
@@ -105,7 +106,7 @@ public class JPA
      * Failure to do so may result in serious resource leaks, such as audio devices 
      * not being available until the next reboot.</p>
      * @return paNoError if successful, otherwise an error code indicating the cause of failure.
-     * @see jpa.JPA#initialize()
+     * @see com.github.rjeschke.jpa.JPA#initialize()
      */ 
     public static PaError terminate()
     {
