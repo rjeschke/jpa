@@ -1,7 +1,7 @@
 CPP=g++
 CC=gcc
-EXE=../../../lib/jpa/macos64/libjpa.jnilib
-CPPFLAGS=-O3 -fno-strict-aliasing -Wall -Wno-format -arch x86_64 -D MACOS -D HB64
+EXE=../../../lib/jpa/macos/libjpa.jnilib
+CPPFLAGS=-O3 -fno-strict-aliasing -Wall -Wno-format -arch i386 -arch x86_64 -D MACOS
 CCFLAGS=$(CPPFLAGS)
 LIBS = -lportaudio
 
@@ -13,7 +13,7 @@ objects = jpa.o
 
 $(EXE): $(objects)
 	@echo Linking $(EXE) ...
-	@$(CC) -shared -o $(EXE) $(LIBS) $(objects)
+	@$(CC) -arch i386 -arch x86_64 -shared -o $(EXE) $(LIBS) $(objects)
 	@echo READY.
 
 all: $(EXE)

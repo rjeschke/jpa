@@ -13,3 +13,5 @@ release/
 .classpath
 .project
 .cproject
+*~
+

@@ -250,6 +250,8 @@ public class JPA
         return paGetStreamTime(jpaPtr);
     }
 
+    
+    
     // Gets called from native code to prepare the buffers
     @SuppressWarnings("unused")
 	private static void resize(int frames)
@@ -291,6 +293,18 @@ public class JPA
         }
     }
     
+    /**
+     * Threading handling: If flags is set to true, each callback
+     * detaches the thread from the JVM, on false there's no detaching
+     * performed. Use at you own risk (default == true).
+     * 
+     * @param flag The flag.
+     */
+    public static void enableThreadDetach(boolean flag)
+    {
+        enableThreadDetach(JPA.jpaPtr, flag);
+    }
+    
     private static native long dataAlloc();
     private static native void dataFree(long ptr);
     private static native int paInitialize();
@@ -309,4 +323,5 @@ public class JPA
     private static native int paOpenDefaultStream(long ptr, int numInputChannels, int numOutputChannels, int sampleFormat, double sampleRate, int framesPerBuffer);
     private static native int paGetSampleSize(int format);
     private static native double paGetStreamTime(long ptr);
+    private static native void enableThreadDetach(long ptr, boolean flag);
 }

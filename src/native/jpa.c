@@ -40,6 +40,8 @@ typedef struct
     jclass clazz;
     jmethodID callback, resize;
     jfieldID input, output, buffer;
+    int detachThread;
+    volatile int sync;
 } JPA_DATA;
 
 static int jpaStreamCallback(
@@ -50,14 +52,21 @@ static int jpaStreamCallback(
     JNIEnv* env;
     jobject buffer;
     void* ptr;
+    int sync = j->sync;
 
-    if(!(*(j->jvm))->AttachCurrentThread(j->jvm, (void**)&env, NULL))
+    if(sync < 2 && !(*(j->jvm))->AttachCurrentThread(j->jvm, (void**)&env, NULL))
     {
+
         // Call the resize method to prepare the ByteBuffer
-        (*env)->CallStaticVoidMethod(env, j->clazz, j->resize, (jint)frameCount);
+#ifdef MACOS
+        jclass jcl = (*env)->FindClass(env, "com/github/rjeschke/jpa/JPA");
+#else
+        jclass jcl = j->class;
+#endif
+        (*env)->CallStaticVoidMethod(env, jcl, j->resize, (jint)frameCount);
 
         // Do we have an input buffer?
-        buffer = (*env)->GetStaticObjectField(env, j->clazz, j->input);
+        buffer = (*env)->GetStaticObjectField(env, jcl, j->input);
         if(buffer)
         {
             // Yes, get address and copy input -> ByteBuffer
@@ -67,20 +76,32 @@ static int jpaStreamCallback(
                     (size_t)frameCount * (size_t)j->iFrameSize);
         }
 
-        buffer = (*env)->GetStaticObjectField(env, j->clazz, j->output);
+        buffer = (*env)->GetStaticObjectField(env, jcl, j->output);
         ptr = buffer ? (*env)->GetDirectBufferAddress(env, (*env)->GetObjectField(env, buffer, j->buffer)) : 0;
 
         if(ptr)
             memset(ptr, 0, (size_t)frameCount * (size_t)j->oFrameSize);
 
         // Call the callback method
-        (*env)->CallStaticVoidMethod(env, j->clazz, j->callback, (jint)frameCount);
+        (*env)->CallStaticVoidMethod(env, jcl, j->callback, (jint)frameCount);
 
         if(ptr)
             memcpy(output, ptr, (size_t)frameCount * (size_t)j->oFrameSize);
 
-        (*(j->jvm))->DetachCurrentThread(j->jvm);
-    }
+        
+        if(j->detachThread)
+        {
+            (*(j->jvm))->DetachCurrentThread(j->jvm);
+        }
+        else
+        {
+            if(sync == 1)
+            {
+                (*(j->jvm))->DetachCurrentThread(j->jvm);
+                j->sync = 2;
+            }
+        }
+    } 
     // Done
     return paContinue;
 }
@@ -285,6 +306,12 @@ JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paIsFormatSupported(JNIE
     return Pa_IsFormatSupported(i, o, (double)sampleRate);
 }
 
+JNIEXPORT void JNICALL Java_com_github_rjeschke_jpa_JPA_enableThreadDetach(JNIEnv *env, jclass clazz, jlong jPtr, jboolean flag)
+{
+    JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
+    j->detachThread = flag == JNI_TRUE ? -1 : 0;
+}
+
 JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paCloseStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
@@ -294,18 +321,37 @@ JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paCloseStream(JNIEnv *en
 JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paStartStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
+    j->sync = 0;
     return Pa_StartStream(j->stream);
 }
+
+static void waitSync(JPA_DATA *j)
+{
+    int count = 500;
+    if(Pa_IsStreamActive(j->stream))
+    {
+        j->sync = 1;
+        while(j->sync != 2 && --count > 0)
+        {
+            Pa_Sleep(10);
+        }
+    }
+}
+
 
 JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paStopStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
+    if(!j->detachThread)
+        waitSync(j);
     return Pa_StopStream(j->stream);
 }
 
 JNIEXPORT jint JNICALL Java_com_github_rjeschke_jpa_JPA_paAbortStream(JNIEnv *env, jclass clazz, jlong jPtr)
 {
     JPA_DATA *j = (JPA_DATA*)long2Ptr(jPtr);
+    if(!j->detachThread)
+        waitSync(j);
     return Pa_AbortStream(j->stream);
 }
 
@@ -332,6 +378,8 @@ JNIEXPORT jlong JNICALL Java_com_github_rjeschke_jpa_JPA_dataAlloc(JNIEnv *env, 
     data->input = (*env)->GetStaticFieldID(env, clazz, "input", "Lcom/github/rjeschke/jpa/PaBuffer;");
     data->output = (*env)->GetStaticFieldID(env, clazz, "output", "Lcom/github/rjeschke/jpa/PaBuffer;");
     data->buffer = (*env)->GetFieldID(env, (*env)->FindClass(env, "Lcom/github/rjeschke/jpa/PaBuffer;"), "byteBuffer", "Ljava/nio/ByteBuffer;");
+    data->detachThread = -1;
+    data->sync = 0;
     return ptr2Long(data);
 }
 
