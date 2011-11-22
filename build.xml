@@ -87,4 +87,17 @@
     </delete>
   </target>
 
+  <target name="macos" description="Builds Mac OS universal binaries">
+    <exec executable="make" dir="src\native\macos">
+      <arg value="all"/>
+    </exec>
+  </target>
+
+  <target name="macos_clean" description="Cleans Mac OS binaries">
+    <delete>
+      <fileset dir="lib/jpa/macos"/>
+      <fileset dir="src/native/macos" excludes="makefile"/>
+    </delete>
+  </target>
+
 </project>
