@@ -61,7 +61,7 @@ static int jpaStreamCallback(
 #ifdef MACOS
         jclass jcl = (*env)->FindClass(env, "com/github/rjeschke/jpa/JPA");
 #else
-        jclass jcl = j->class;
+        jclass jcl = j->clazz;
 #endif
         (*env)->CallStaticVoidMethod(env, jcl, j->resize, (jint)frameCount);
 
