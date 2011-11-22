@@ -185,7 +185,7 @@ public final class LibraryLoader
 		if(os.startsWith("linux"))
 			return "linux";
 		if(os.startsWith("mac"))
-			return "mac";
+			return "macos";
 
 		throw new RuntimeException("Unsupported OS version:" + System.getProperty("os.name"));
 	}
