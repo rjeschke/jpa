@@ -1,21 +1,31 @@
 jpa - PortAudio Java bindings
-Copyright (C) 2011 Ren√© Jeschke <rene_jeschke@yahoo.de>
+Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
 See LICENSE.txt for licensing information.
 -------------------------------------------------------
 
 'jpa' is a Java wrapper for libPortAudio, bringing this nice audio API
 to us Java developers.
 
-Currently Win32(64) and Linux32/64 binaries are included.
+Currently Win32, Linux32/64 and Mac universal binaries are included ... so
+I'm covering the important systems I think.
 
 Generated ApiDoc is mostly (slighty modified) copy'n'paste from the original
-PortAudio docs.
+PortAudio docs (I did include an ApiDoc?).
 
 
 Usage:
 ------
 Just do 'ant release" and classpath the 'release/jpa.jar' into your project.
 (I'll push the release folder unto github as soon as the ApiDoc is finished.)
+
+
+Getting portaudio:
+------------------
+Linux:   Portaudio should be available for your dist using the standard ways 
+         (e.g. apt-get).
+Windows: As portaudio binaries are hard to get, I included a pre-compiled version
+         supporting WME, DX, Jack and ASIO.
+Mac:     Use homebrew. A 'brew install portaudio' should do the trick.
 
 
 Using Eclipse:
@@ -30,7 +40,8 @@ For C:
   - Create a new C makefile project, override default location and use 'src/native'
     from the project folder
   - (Note to Windows users: Setting up the platform SDK or Visual Studio to build
-    stuff on the command line is a bit tricky, I'll post a HOWTO in the near future.)
+    stuff on the command line is a bit tricky, See the following link on how I did
+    this using only free software: http://rjeschke.github.com/articles/article_1.html)
 
 
 Build instructions:
@@ -52,6 +63,10 @@ To rebuild the binaries:
    (Includes all stuff needed to build)
    'ant win32_clean' to clean the native target
    'ant win32'
+- On Mac OS bit:
+   (homebrew: 'brew install portaudio --universal')
+   'ant macos_clean' to clean the native target
+   'ant macos' (builds i386/x86_64 universal binary
 
 ---
 Project link: https://github.com/rjeschke/jpa
