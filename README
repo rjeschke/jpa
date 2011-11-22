@@ -63,7 +63,7 @@ To rebuild the binaries:
    (Includes all stuff needed to build)
    'ant win32_clean' to clean the native target
    'ant win32'
-- On Mac OS bit:
+- On Mac OS:
    (homebrew: 'brew install portaudio --universal')
    'ant macos_clean' to clean the native target
    'ant macos' (builds i386/x86_64 universal binary
