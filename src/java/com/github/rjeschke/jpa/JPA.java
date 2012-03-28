@@ -1,7 +1,7 @@
 /*
-* Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
-* See LICENSE.txt for licensing information.
-*/
+ * Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
+ * See LICENSE.txt for licensing information.
+ */
 package com.github.rjeschke.jpa;
 
 import java.nio.ByteBuffer;
@@ -12,12 +12,12 @@ import com.github.rjeschke.jpa.PaBuffer.Type;
 public class JPA
 {
     private JPA() { /* singleton */ }
-    
+
     private static PaBuffer   output     = null;
     private static PaBuffer   input      = null;
     private static PaCallback paCallback = null;
     private static long       jpaPtr     = 0;
-    
+
     static
     {
         // On windows, load portaudio_x86.dll
@@ -25,10 +25,10 @@ public class JPA
         // Load JNI library
         LibraryLoader.load("jpa", "jpa");
     }
-    
+
     public final static int paNoDevice                              = -1;
     public final static int paUseHostApiSpecificDeviceSpecification = -2;
-    
+
     public final static int paNoFlag                                = 0;
     public final static int paClipOff                               = 0x00000001;
     public final static int paDitherOff                             = 0x00000002;
@@ -71,7 +71,7 @@ public class JPA
     public static native PaHostErrorInfo getLastHostErrorInfo();
     public static native void sleep(long msec);
     public static native long getDirectByteBufferPointer(ByteBuffer buffer);
-    
+
     /** 
      * Library initialization function - call this before using PortAudio.
      * <p>This function initialises internal data structures and prepares underlying
@@ -91,10 +91,10 @@ public class JPA
     {
         if(jpaPtr == 0)
             jpaPtr = dataAlloc();
-        
+
         return PaError.fromValue(paInitialize());
     }
-    
+
     /** 
      * Library termination function - call this when finished using PortAudio.
      * <p>This function deallocates all resources allocated by PortAudio since it was
@@ -114,7 +114,7 @@ public class JPA
         jpaPtr = 0;
         return PaError.fromValue(paTerminate());
     }
-    
+
     /**
      * Sets the user call-back function.
      * 
@@ -124,12 +124,12 @@ public class JPA
     {
         paCallback = callback;
     }
-    
+
     public static PaError isFormatSupported(PaStreamParameters inputParameters, PaStreamParameters outputParameters, double sampleRate)
     {
         return PaError.fromValue(paIsFormatSupported(inputParameters, outputParameters, sampleRate));
     }
-    
+
     /** 
      * Translate the supplied PortAudio error code into a human readable message.
      * @param err PortAudio error code.
@@ -139,15 +139,15 @@ public class JPA
     {
         return paGetErrorText(err.getValue());
     }
-    
+
     public static PaStreamInfo getStreamInfo()
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         return paGetStreamInfo(jpaPtr);
     }
-    
+
     public static PaError openStream(PaStreamParameters inputParameters, PaStreamParameters outputParameters, double sampleRate, int framesPerBuffer, int streamFlags)
     {
         if(jpaPtr == 0L)
@@ -160,23 +160,23 @@ public class JPA
             input = inputParameters != null ? new PaBuffer(pa2BufferType(inputParameters.getSampleFormat()), inputParameters.getChannelCount()) : null;
             output = outputParameters != null ? new PaBuffer(pa2BufferType(outputParameters.getSampleFormat()), outputParameters.getChannelCount()) : null;
         }
-        
+
         return err;
     }
-    
+
     public static PaError openDefaultStream(int numInputChannels, int numOutputChannels, PaSampleFormat sampleFormat, double sampleRate, int framesPerBuffer)
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         final PaError err = PaError.fromValue(paOpenDefaultStream(jpaPtr, numInputChannels, numOutputChannels, sampleFormat.getValue(), sampleRate, framesPerBuffer));
-        
+
         if(err == PaError.paNoError)
         {
             input = numInputChannels > 0 ? new PaBuffer(pa2BufferType(sampleFormat), numInputChannels) : null;
             output = numOutputChannels > 0 ? new PaBuffer(pa2BufferType(sampleFormat), numOutputChannels) : null;
         }
-        
+
         return err;
     }
 
@@ -184,25 +184,25 @@ public class JPA
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         return PaError.fromValue(paCloseStream(jpaPtr));
     }
-    
+
     public static PaError startStream()
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         return PaError.fromValue(paStartStream(jpaPtr));
     }
-    
+
     public static PaError stopStream()
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         final PaError err = PaError.fromValue(paStopStream(jpaPtr));
-        
+
         if(err == PaError.paNoError)
         {
             while(paIsStreamActive(jpaPtr) > 0 || paIsStreamStopped(jpaPtr) == 0)
@@ -210,18 +210,18 @@ public class JPA
                 try { Thread.sleep(5); } catch (InterruptedException e) { break; }
             }
         }
-        
+
         return err;
     }
-    
+
     public static PaError abortStream()
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         return PaError.fromValue(paAbortStream(jpaPtr));
     }
-    
+
     public static boolean isStreamActive()
     {
         return jpaPtr == 0L ? false : paIsStreamActive(jpaPtr) != 0;
@@ -241,20 +241,20 @@ public class JPA
     {
         return paGetSampleSize(format.getValue());
     }
-    
+
     public static double getStreamTime()
     {
         if(jpaPtr == 0L)
             throw new NullPointerException("Missing call to JPA.initialize()");
-        
+
         return paGetStreamTime(jpaPtr);
     }
 
-    
-    
+
+
     // Gets called from native code to prepare the buffers
     @SuppressWarnings("unused")
-	private static void resize(int frames)
+    private static void resize(int frames)
     {
         if(output != null)
         {
@@ -270,12 +270,12 @@ public class JPA
 
     // Gets called from native code
     @SuppressWarnings("unused")
-	private static void callback(int frames)
+    private static void callback(int frames)
     {
         if(paCallback != null)
             paCallback.paCallback(input, output, frames);
     }
-    
+
     protected static PaBuffer.Type pa2BufferType(PaSampleFormat format)
     {
         switch(format)
@@ -292,7 +292,7 @@ public class JPA
             return Type.BYTE;
         }
     }
-    
+
     /**
      * Threading handling: If flags is set to true, each callback
      * detaches the thread from the JVM, on false there's no detaching
@@ -304,7 +304,7 @@ public class JPA
     {
         enableThreadDetach(JPA.jpaPtr, flag);
     }
-    
+
     private static native long dataAlloc();
     private static native void dataFree(long ptr);
     private static native int paInitialize();

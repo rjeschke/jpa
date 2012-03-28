@@ -1,7 +1,7 @@
 /*
-* Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
-* See LICENSE.txt for licensing information.
-*/
+ * Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
+ * See LICENSE.txt for licensing information.
+ */
 package com.github.rjeschke.jpa;
 
 public class PaDeviceInfo
@@ -20,27 +20,27 @@ public class PaDeviceInfo
     {
         // Object creation from JNI    
     }
-    
+
     public String getName()
     {
         return this.name;
     }
-    
+
     public int getHostApi()
     {
         return this.hostApi;
     }
-    
+
     public int getMaxInputChannels()
     {
         return this.maxInputChannels;
     }
-    
+
     public int getMaxOutputChannels()
     {
         return this.maxOutputChannels;
     }
-    
+
     public double getDefaultLowInputLatency()
     {
         return this.defaultLowInputLatency;
@@ -60,7 +60,7 @@ public class PaDeviceInfo
     {
         return this.defaultHighOutputLatency;
     }
-    
+
     public double getDefaultSampleRate()
     {
         return this.defaultSampleRate;

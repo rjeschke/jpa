@@ -1,7 +1,7 @@
 /*
-* Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
-* See LICENSE.txt for licensing information.
-*/
+ * Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
+ * See LICENSE.txt for licensing information.
+ */
 package com.github.rjeschke.jpa;
 
 import java.nio.ByteBuffer;
@@ -19,13 +19,13 @@ public class PaBuffer
     private final Type  type;
     private final int   channels, frameSize, sampleSize;
     private int         frameCount;
-    
+
     protected PaBuffer(Type type, int channels)
     {
         this.type = type;
         this.channels = channels;
         this.frameCount = 0;
-        
+
         switch(type)
         {
         default:
@@ -40,10 +40,10 @@ public class PaBuffer
             this.sampleSize = 4;
             break;
         }
-        
+
         this.frameSize = this.sampleSize * this.channels;
     }
-    
+
     public void clear()
     {
         this.byteBuffer.clear();
@@ -62,14 +62,14 @@ public class PaBuffer
             break;
         }
     }
-    
+
     protected void resize(int frames)
     {
         if(frames > this.frameCount)
         {
             this.byteBuffer = ByteBuffer.allocateDirect(frames * this.frameSize);
             this.byteBuffer.order(ByteOrder.nativeOrder());
-            
+
             switch(this.type)
             {
             case FLOAT:
@@ -84,61 +84,61 @@ public class PaBuffer
             case BYTE:
                 break;
             }
-            
+
             this.frameCount = frames;
         }
     }
-    
+
     public Type getType()
     {
         return this.type;
     }
-    
+
     public ByteBuffer getByteBuffer()
     {
         return this.byteBuffer;
     }
-    
+
     public FloatBuffer getFloatBuffer()
     {
         return this.floatBuffer;
     }
-    
+
     public IntBuffer getIntBuffer()
     {
         return this.intBuffer;
     }
-    
+
     public ShortBuffer getShortBuffer()
     {
         return this.shortBuffer;
     }
-    
+
     public int getFrames()
     {
         return this.frameCount;
     }
-    
+
     public int getChannels()
     {
         return this.channels;
     }
-    
+
     public int getFrameSize()
     {
         return this.frameSize;
     }
-    
+
     public int getSampleSize()
     {
         return this.sampleSize;
     }
-    
+
     public long getAddress()
     {
         return JPA.getDirectByteBufferPointer(this.byteBuffer);
     }
-    
+
     public enum Type
     {
         FLOAT,
