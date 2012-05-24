@@ -21,9 +21,9 @@ public class JPA
     static
     {
         // On windows, load portaudio_x86.dll
-        LibraryLoader.loadNative("win", "jpa", "portaudio_x86.dll");
+        LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio_x86.dll");
         // Load JNI library
-        LibraryLoader.load("jpa", "jpa");
+        LibraryLoader.load("com.github.rjeschke.jpa", "jpa");
     }
 
     public final static int paNoDevice                              = -1;
