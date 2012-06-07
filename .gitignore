@@ -9,6 +9,7 @@ release/
 *.manifest
 *.lib
 !portaudio_x86.lib
+!portaudio.lib
 .settings
 .classpath
 .project

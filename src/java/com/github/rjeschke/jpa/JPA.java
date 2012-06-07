@@ -21,7 +21,8 @@ public class JPA
     static
     {
         // On windows, load portaudio_x86.dll
-        LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio_x86.dll");
+        LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio.dll");
+        //LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio_x86.dll");
         // Load JNI library
         LibraryLoader.load("com.github.rjeschke.jpa", "jpa");
     }
