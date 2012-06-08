@@ -1,35 +1,41 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.github.rjeschke</groupId>
   <artifactId>jpa</artifactId>
-  <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
   <name>jpa</name>
   <url>https://github.com/rjeschke/jpa</url>
+  <packaging>jar</packaging>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
   <distributionManagement>
     <repository>
       <uniqueVersion>false</uniqueVersion>
-      <id>dev1</id>
-      <name>Localhost staging</name>
-      <url>file:///srv/maven</url>
+      <id>release-rj</id>
+      <name>Release repository</name>
+      <url>scp://maven.renejeschke.de/maven</url>
       <layout>default</layout>
     </repository>
     <snapshotRepository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>dev2</id>
-      <name>Localhost staging</name>
-      <url>file:///srv/maven</url>
+      <uniqueVersion>true</uniqueVersion>
+      <id>snapshot-rj</id>
+      <name>Snapshot repository</name>
+      <url>scp://maven.renejeschke.de/maven-snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
   </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.4</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
@@ -38,6 +44,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -50,6 +57,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8.1</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -60,13 +68,27 @@
         </executions>
       </plugin>
     </plugins>
-    <sourceDirectory>${basedir}/src/java</sourceDirectory>
+    
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.2</version>
+      </extension>
+    </extensions>
+
     <resources>
       <resource>
         <directory>${basedir}/lib</directory>
       </resource>
     </resources>
+
+    <sourceDirectory>${basedir}/src/java</sourceDirectory>
+    
   </build>
+
   <dependencies>
   </dependencies>
+
 </project>
+

@@ -8,7 +8,6 @@ import java.nio.ByteBuffer;
 
 import com.github.rjeschke.jpa.PaBuffer.Type;
 
-
 public class JPA
 {
     private JPA() { /* singleton */ }
@@ -22,7 +21,6 @@ public class JPA
     {
         // On windows, load portaudio_x86.dll
         LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio.dll");
-        //LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio_x86.dll");
         // Load JNI library
         LibraryLoader.load("com.github.rjeschke.jpa", "jpa");
     }
@@ -251,10 +249,7 @@ public class JPA
         return paGetStreamTime(jpaPtr);
     }
 
-
-
     // Gets called from native code to prepare the buffers
-    @SuppressWarnings("unused")
     private static void resize(int frames)
     {
         if(output != null)
@@ -270,7 +265,6 @@ public class JPA
     }
 
     // Gets called from native code
-    @SuppressWarnings("unused")
     private static void callback(int frames)
     {
         if(paCallback != null)
