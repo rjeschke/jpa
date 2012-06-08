@@ -19,7 +19,7 @@ public class JPA
 
     static
     {
-        // On windows, load portaudio_x86.dll
+        // On windows, load portaudio.dll
         LibraryLoader.loadNative("win", "com.github.rjeschke.jpa", "portaudio.dll");
         // Load JNI library
         LibraryLoader.load("com.github.rjeschke.jpa", "jpa");
@@ -73,7 +73,7 @@ public class JPA
 
     /** 
      * Library initialization function - call this before using PortAudio.
-     * <p>This function initialises internal data structures and prepares underlying
+     * <p>This function initializes internal data structures and prepares underlying
      * host APIs for use.  With the exception of Pa_GetVersion(), Pa_GetVersionText(),
      * and Pa_GetErrorText(), this function MUST be called before using any other
      * PortAudio API functions.</p>
@@ -97,7 +97,7 @@ public class JPA
     /** 
      * Library termination function - call this when finished using PortAudio.
      * <p>This function deallocates all resources allocated by PortAudio since it was
-     * initializied by a call to Pa_Initialize(). In cases where Pa_Initialise() has
+     * initialized by a call to Pa_Initialize(). In cases where Pa_Initialise() has
      * been called multiple times, each call must be matched with a corresponding call
      * to Pa_Terminate(). The final matching call to Pa_Terminate() will automatically
      * close any PortAudio streams that are still open.</p>
@@ -289,7 +289,7 @@ public class JPA
     }
 
     /**
-     * Threading handling: If flags is set to true, each callback
+     * Threading handling: If flag is set to <code>true</code>, each callback
      * detaches the thread from the JVM, on false there's no detaching
      * performed. Use at you own risk (default == true).
      * 

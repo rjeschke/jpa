@@ -3,28 +3,30 @@ Copyright (C) 2011 René Jeschke <rene_jeschke@yahoo.de>
 See LICENSE.txt for licensing information.
 -------------------------------------------------------
 
-'jpa' is a Java wrapper for libPortAudio, bringing this nice audio API
+'jpa' is a Java wrapper for libPortAudio (v19), bringing this nice audio API
 to us Java developers.
 
-Currently Win32, Linux32/64 and Mac universal binaries are included ... so
+Currently Win7_32/64, Linux32/64 and Mac universal binaries are included ... so
 I'm covering the important systems I think.
 
 Generated ApiDoc is mostly (slighty modified) copy'n'paste from the original
 PortAudio docs (I did include an ApiDoc?).
 
-
 Usage:
 ------
-Just do 'ant release" and classpath the 'release/jpa.jar' into your project.
-(I'll push the release folder unto github as soon as the ApiDoc is finished.)
-
+* ant
+    Just do 'ant release" and classpath the 'release/jpa.jar' into your project.
+    (I'll push the release folder unto github as soon as the ApiDoc is finished.)
+* maven
+    Have a look at http://renejeschke.de/maven. There you will find all infos
+    you need to use jpa with maven.
 
 Getting portaudio:
 ------------------
 Linux:   Portaudio should be available for your dist using the standard ways 
          (e.g. apt-get).
 Windows: As portaudio binaries are hard to get, I included a pre-compiled version
-         supporting WME, DX, Jack and ASIO.
+         supporting WME, DX and ASIO.
 Mac:     Use homebrew. A 'brew install portaudio' should do the trick.
 
 
