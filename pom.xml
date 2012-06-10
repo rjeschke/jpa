@@ -7,25 +7,28 @@
   <version>0.1-SNAPSHOT</version>
   <name>jpa</name>
   <url>https://github.com/rjeschke/jpa</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
   <distributionManagement>
     <repository>
       <uniqueVersion>false</uniqueVersion>
-      <id>dev1</id>
-      <name>Localhost staging</name>
-      <url>file:///srv/maven</url>
+      <id>release-rj</id>
+      <name>Release repository</name>
+      <url>scp://maven.renejeschke.de/maven</url>
       <layout>default</layout>
     </repository>
     <snapshotRepository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>dev2</id>
-      <name>Localhost staging</name>
-      <url>file:///srv/maven</url>
+      <uniqueVersion>true</uniqueVersion>
+      <id>snapshot-rj</id>
+      <name>Snapshot repository</name>
+      <url>scp://maven.renejeschke.de/maven-snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
   </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -60,13 +63,24 @@
         </executions>
       </plugin>
     </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.2</version>
+      </extension>
+    </extensions>
+    
     <sourceDirectory>${basedir}/src/java</sourceDirectory>
+
     <resources>
       <resource>
         <directory>${basedir}/lib</directory>
       </resource>
     </resources>
   </build>
+
   <dependencies>
   </dependencies>
 </project>
