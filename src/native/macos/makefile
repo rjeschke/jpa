@@ -1,6 +1,6 @@
 CPP=g++
 CC=gcc
-EXE=../../../lib/jpa/macos/libjpa.jnilib
+EXE=../../../lib/com/github/rjeschke/jpa/macos/libjpa.jnilib
 CPPFLAGS=-O3 -fno-strict-aliasing -Wall -Wno-format -arch i386 -arch x86_64 -D MACOS
 CCFLAGS=$(CPPFLAGS)
 LIBS = -lportaudio

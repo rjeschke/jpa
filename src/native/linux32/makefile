@@ -1,6 +1,6 @@
 CPP=g++
 CC=gcc
-EXE=../../../lib/jpa/linux32/libjpa.so
+EXE=../../../lib/com/github/rjeschke/jpa/linux32/libjpa.so
 CPPFLAGS=-O3 -fno-strict-aliasing -Wall -Wno-format -march=i686 -mfpmath=387 -D LINUX -D HB32
 CCFLAGS=$(CPPFLAGS)
 LIBS = -lrt -lpthread -lasound -lportaudio
