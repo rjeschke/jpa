@@ -76,7 +76,7 @@
         <version>2.2</version>
       </extension>
     </extensions>
-
+    
     <resources>
       <resource>
         <directory>${basedir}/lib</directory>
