@@ -98,6 +98,18 @@
       <artifactId>jpa-macos</artifactId>
       <version>${project.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.github.rjeschke</groupId>
+      <artifactId>jpa-linux32</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.rjeschke</groupId>
+      <artifactId>jpa-linux64</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
 </project>
