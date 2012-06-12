@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.rjeschke</groupId>
-  <artifactId>jpa-macos</artifactId>
-  <name>jpa MacOS universal binaries</name>
+  <artifactId>jpa-linux64</artifactId>
+  <name>jpa Linux 64 Bit binaries</name>
   <url>https://github.com/rjeschke/jpa</url>
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
