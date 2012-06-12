@@ -6,20 +6,11 @@ See LICENSE.txt for licensing information.
 'jpa' is a Java wrapper for libPortAudio (v19), bringing this nice audio API
 to us Java developers.
 
-Currently Win7_32/64, Linux32/64 and Mac universal binaries are included ... so
-I'm covering the important systems I think.
-
-Generated ApiDoc is mostly (slighty modified) copy'n'paste from the original
-PortAudio docs (I did include an ApiDoc?).
-
 Usage:
 ------
-* ant
-    Just do 'ant release" and classpath the 'release/jpa.jar' into your project.
-    (I'll push the release folder unto github as soon as the ApiDoc is finished.)
 * maven
-    Have a look at http://renejeschke.de/maven. There you will find all infos
-    you need to use jpa with maven.
+    Have a look at http://renejeschke.de/maven. There you will find all information
+    you need to use jpa with Java and Apache Maven.
 
 Getting portaudio:
 ------------------
@@ -29,46 +20,6 @@ Windows: As portaudio binaries are hard to get, I included a pre-compiled versio
          supporting WME, DX and ASIO.
 Mac:     Use homebrew. A 'brew install portaudio' should do the trick.
 
-
-Using Eclipse:
---------------
-For Java:
-  - create a new Java project in your workspace
-  - Configure Build Path -> Sources -> Link Folders 'src/java' and 'lib' from
-    the project folder
-  - Remove the old 'src' folder inside the Eclipse project
-  - Or use 'Create project from existing source'
-For C:
-  - Create a new C makefile project, override default location and use 'src/native'
-    from the project folder
-  - (Note to Windows users: Setting up the platform SDK or Visual Studio to build
-    stuff on the command line is a bit tricky, See the following link on how I did
-    this using only free software: http://rjeschke.github.com/articles/article_1.html)
-
-
-Build instructions:
--------------------
-To build the Jar simply use 'ant'. You'll find 'jpa.jar' inside of 'build/jar'.
-For a full release build, use 'ant release'. This will create the release jars
-inside the 'release' folder (containing binary, apidoc and source).
-
-To rebuild the binaries:
-- On Linux 32 bit:
-   (You will need to have the portaudio19 dev package installed)
-   'ant linux32_clean' to clean the native target
-   'ant linux32'
-- On Linux 64 bit:
-   (You will need to have the portaudio19 dev package installed)
-   'ant linux64_clean' to clean the native target
-   'ant linux64'
-- On Windows 32 bit:
-   (Includes all stuff needed to build)
-   'ant win32_clean' to clean the native target
-   'ant win32'
-- On Mac OS:
-   (homebrew: 'brew install portaudio --universal')
-   'ant macos_clean' to clean the native target
-   'ant macos' (builds i386/x86_64 universal binary
 
 ---
 Project link: https://github.com/rjeschke/jpa
