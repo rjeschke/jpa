@@ -5,13 +5,27 @@
   <groupId>com.github.rjeschke</groupId>
   <artifactId>jpa</artifactId>
   <version>0.1-SNAPSHOT</version>
-  <name>jpa</name>
+  <name>Java portaudio bindings</name>
   <url>https://github.com/rjeschke/jpa</url>
   <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>renejeschke-native-releases</id>
+      <url>http://maven.renejeschke.de/native</url>
+      <layout>default</layout>
+    </repository>
+    
+    <repository>
+      <id>renejeschke-native-snapshots</id>
+      <url>http://maven.renejeschke.de/native-snapshots</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
 
   <distributionManagement>
     <repository>
@@ -76,18 +90,14 @@
         <version>2.2</version>
       </extension>
     </extensions>
-    
-    <resources>
-      <resource>
-        <directory>${basedir}/lib</directory>
-      </resource>
-    </resources>
-
-    <sourceDirectory>${basedir}/src/java</sourceDirectory>
-    
   </build>
 
   <dependencies>
+    <dependency>
+      <groupId>com.github.rjeschke</groupId>
+      <artifactId>jpa-macos</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
 </project>
