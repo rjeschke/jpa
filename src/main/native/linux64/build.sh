@@ -1,6 +1,6 @@
 #!bin/bash
 
-LIB_DIR=src/main/resources/com/github/rjeschke/jpa/linux64/macos
+LIB_DIR=src/main/resources/com/github/rjeschke/jpa/native/linux64
 LIB_NAME=libjpa.so
 
 set -e
