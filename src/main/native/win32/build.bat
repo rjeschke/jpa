@@ -1,6 +1,6 @@
 @echo off
 
-set LIB_DIR=src\main\resources\com\github\rjeschke\jpa\native\win64
+set LIB_DIR=src\main\resources\com\github\rjeschke\jpa\native\win32
 set LIB_NAME=jpa.dll
 
 mkdir target\native

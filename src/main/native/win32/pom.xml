@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.rjeschke</groupId>
-  <artifactId>jpa-win64</artifactId>
-  <name>jpa Windows 7 64 Bit binaries</name>
+  <artifactId>jpa-win32</artifactId>
+  <name>jpa Windows 7 32 Bit binaries</name>
   <url>https://github.com/rjeschke/jpa</url>
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>

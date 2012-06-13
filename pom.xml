@@ -110,6 +110,18 @@
       <artifactId>jpa-linux64</artifactId>
       <version>${project.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>com.github.rjeschke</groupId>
+      <artifactId>jpa-win32</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.rjeschke</groupId>
+      <artifactId>jpa-win64</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
 </project>
