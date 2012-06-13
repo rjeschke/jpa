@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.github.rjeschke</groupId>
+  <artifactId>jpa-win64</artifactId>
+  <name>jpa Windows 7 64 Bit binaries</name>
+  <url>https://github.com/rjeschke/jpa</url>
+  <packaging>jar</packaging>
+  <version>0.1-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>release-rj</id>
+      <name>Release repository</name>
+      <url>scp://maven.renejeschke.de/maven-native</url>
+      <layout>default</layout>
+    </repository>
+    
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>snapshot-rj</id>
+      <name>Snapshot repository</name>
+      <url>scp://maven.renejeschke.de/maven-native-snapshots</url>
+      <layout>default</layout>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <exec executable="cmd.exe" failonerror="true">
+                  <arg line="build.bat"/>
+                </exec>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.2</version>
+      </extension>
+    </extensions>
+  </build>
+  
+</project>
+
