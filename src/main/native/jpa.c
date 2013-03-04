@@ -17,28 +17,16 @@
 #include <portaudio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#if defined(WIN32) || defined(WIN64)
-#define int8_t __int8
-#define uint8_t unsigned __int8
-#define int16_t __int16
-#define uint16_t unsigned __int16
-#define int32_t __int32
-#define uint32_t unsigned __int32
-#define int64_t __int64
-#define uint64_t unsigned __int64
-#else
-#include <stdint.h>
-#endif
+#include "defines.h"
 
 static jlong ptr2Long(void* ptr)
 {
-    return (jlong)((uint64_t)ptr);
+    return (jlong)((size_t)ptr);
 }
 
 static void* long2Ptr(jlong ptr)
 {
-    return (void*)((uint64_t)ptr);
+    return (void*)((size_t)ptr);
 }
 
 typedef struct

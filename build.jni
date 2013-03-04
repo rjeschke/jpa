@@ -1,0 +1,10 @@
+# jpa JNI build file
+
+project.package     = com.github.rjeschke.jpa.native
+project.name        = jpa
+project.sources     = jpa.c
+
+# Linux
+linux.ldflags      += -lportaudio -lrt -lpthread -lasound 
+
+# OSX

@@ -18,6 +18,7 @@ package com.github.rjeschke.jpa;
 import java.nio.ByteBuffer;
 
 import com.github.rjeschke.jpa.PaBuffer.Type;
+import com.github.rjeschke.libload.LibLoad;
 
 public class JPA
 {
@@ -31,9 +32,9 @@ public class JPA
     static
     {
         // On windows, load portaudio.dll
-        LibraryLoader.loadNative("win", "com.github.rjeschke.jpa.native", "portaudio.dll");
+        LibLoad.loadNative("win", "com.github.rjeschke.jpa.native", "portaudio.dll");
         // Load JNI library
-        LibraryLoader.load("com.github.rjeschke.jpa.native", "jpa");
+        LibLoad.load("com.github.rjeschke.jpa.native", "jpa");
     }
 
     public final static int paNoDevice                              = -1;

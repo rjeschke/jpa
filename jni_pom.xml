@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.rjeschke</groupId>
-  <artifactId>jpa-linux64</artifactId>
-  <name>jpa Linux 64 Bit binaries</name>
+  <artifactId>jpa-$$arch$$</artifactId>
+  <name>JPA $$arch$$ binaries</name>
   <url>https://github.com/rjeschke/jpa</url>
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
@@ -33,27 +33,6 @@
   </distributionManagement>
 
   <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>validate</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <tasks>
-                <exec executable="bash" failonerror="true">
-                  <arg line="build.sh"/>
-                </exec>
-              </tasks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-
     <extensions>
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
@@ -64,4 +43,3 @@
   </build>
   
 </project>
-
