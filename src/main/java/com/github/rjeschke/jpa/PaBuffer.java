@@ -37,7 +37,7 @@ public class PaBuffer
         this.channels = channels;
         this.frameCount = 0;
 
-        switch(type)
+        switch (type)
         {
         default:
         case BYTE:
@@ -58,7 +58,7 @@ public class PaBuffer
     public void clear()
     {
         this.byteBuffer.clear();
-        switch(this.type)
+        switch (this.type)
         {
         case BYTE:
             break;
@@ -76,12 +76,12 @@ public class PaBuffer
 
     protected void resize(int frames)
     {
-        if(frames > this.frameCount)
+        if (frames > this.frameCount)
         {
             this.byteBuffer = ByteBuffer.allocateDirect(frames * this.frameSize);
             this.byteBuffer.order(ByteOrder.nativeOrder());
 
-            switch(this.type)
+            switch (this.type)
             {
             case FLOAT:
                 this.floatBuffer = this.byteBuffer.asFloatBuffer();
@@ -152,9 +152,6 @@ public class PaBuffer
 
     public enum Type
     {
-        FLOAT,
-        INT,
-        SHORT,
-        BYTE
+        FLOAT, INT, SHORT, BYTE
     }
 }

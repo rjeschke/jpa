@@ -29,7 +29,7 @@ public class PaDeviceInfo
 
     private PaDeviceInfo()
     {
-        // Object creation from JNI    
+        // Object creation from JNI
     }
 
     public String getName()

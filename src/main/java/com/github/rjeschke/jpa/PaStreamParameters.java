@@ -24,9 +24,9 @@ public class PaStreamParameters
 
     public PaStreamParameters(int device, int channelCount, PaSampleFormat sampleFormat, double suggestedLatency)
     {
-        this.device           = device;
-        this.channelCount     = channelCount;
-        this.sampleFormat     = sampleFormat.getValue();
+        this.device = device;
+        this.channelCount = channelCount;
+        this.sampleFormat = sampleFormat.getValue();
         this.suggestedLatency = suggestedLatency;
     }
 
